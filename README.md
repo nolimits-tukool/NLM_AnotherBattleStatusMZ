@@ -1,0 +1,2 @@
+# NLM_AnotherBattleStatusMZ
+戦闘アクターコマンド入力時に顔付きステータスウインドウを追加表示
