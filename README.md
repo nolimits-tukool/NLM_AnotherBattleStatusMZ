@@ -11,7 +11,7 @@
 
 # download
 
-プラグイン単独での download は、[右クリック「名前を付けてリンク先を保存」](https://github.com/nolimits-tukool/NLM_AnotherBattleStatusMZ/raw/refs/heads/main/NLM_AnotherBattleStatusMZ.js)  
+プラグイン単独での download は、[右クリック「名前を付けてリンク先を保存」](https://raw.githubusercontent.com/nolimits-tukool/NLM_AnotherBattleStatusMZ/refs/heads/main/NLM_AnotherBattleStatusMZ.js)  
 RPGツクールMZ専用です
 
 プラグイン入りの**サンプルプロジェクト**（カードゲームMZサンプル3）は [ここから **download**](https://github.com/nolimits-tukool/CardGameMZSample3/raw/refs/heads/main/CardMZSample3.zip)
@@ -23,4 +23,3 @@ RPGツクールMZ専用です
 
 
 ## [プロフィールへ](https://github.com/nolimits-tukool)
-
