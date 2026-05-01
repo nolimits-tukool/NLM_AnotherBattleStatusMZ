@@ -1,24 +1,27 @@
 ﻿/*==========================================================================
  NLM_AnotherBattleStatusMZ.js
 ----------------------------------------------------------------------------
- (C)2025 NoLimits
+ (C)2025-2026 NoLimits
  This software is released under the MIT License.
  http://opensource.org/licenses/mit-license.php
 ----------------------------------------------------------------------------
  Version
  1.0.0 2025/07/01 初版
+ 1.1.0 2026/04/06 HDLayout.js競合対策、パラメータ：X座標で右端指示可能に
 ============================================================================*/
 
 /*:
  * @target MZ
- * @plugindesc 戦闘ステータス追加プラグイン
+ * @plugindesc 戦闘ステータス追加プラグイン (v1.1.0)
  * @author ノリミツ (NoLimits)
+ * @url https://github.com/nolimits-tukool
  * 
  * @param wx
  * @text ウィンドウX座標
- * @desc ウィンドウX座標（デフォルト：670）
+ * @desc ウィンドウX座標（マイナス値だと最右端からの距離となる）　（デフォルト：-1）
  * @type number
- * @default 670
+ * @min -99999
+ * @default -1
  * 
  * @param wy
  * @text ウィンドウY座標
@@ -52,6 +55,7 @@
  * 
  * @param tone
  * @text ウインドウ背景カラー
+ * @desc 以下でウインドウ背景カラーのRGB値を設定　　　　　　　　　（デフォルト値だとピンク色）
  * 
  * @param toneR
  * @parent tone
@@ -83,7 +87,7 @@
  * 
  * @help
  * 
- * 【RPGツクールMZ専用プラグイン】（v1.0.0）
+ * 【RPGツクールMZ専用プラグイン】（v1.1.0）
  * 
  * 戦闘アクターコマンド入力時にステータスウインドウをもう一つ追加表示します
  * 
@@ -95,7 +99,8 @@
  * 簡易的な一行情報ウインドウとしても利用できるかも知れません
  * アクターコマンド入力終了で、ウインドウが閉じます
  * 
- * 自作カードゲームにてステータスウインドウが隠れてしまうため作りました
+ *  v1.1にて HDLayout.js との競合を回避し、パラメータのX座標で マイナス値 を
+ * 　入力することで UI幅に関わらず 最右端からの距離で入力できるようになりました
  * 
  * プラグインコマンドはありません
  * 利用規約はMITライセンスの通りです
@@ -145,11 +150,11 @@
 
     Window_NLMbattleStatus.prototype.drawItemStatus = function(index) {
         const actor = this.actor(index);
-        const rect = this.itemRect(0);
+        const rect  = this.itemRect(0);
         const nameY = this.nameY(rect);
         const stateIconX = this.stateIconX(rect);
         const stateIconY = this.stateIconY(rect);
-        const basicGaugesX = this.basicGaugesX(rect) - 2;
+        const basicGaugesX = 0; // v1.1で変更（HDlayout.jsでのgaugeOffsetXを無効化）
         const basicGaugesY = this.basicGaugesY(rect) + 8;
         this.NABStext(actor, rect.x, nameY); // タイムゲージ・名前と置き換えでテキスト表示
         this.placeStateIcon(actor, stateIconX, stateIconY);
@@ -192,7 +197,9 @@
         const extra = -8;
         const ww = Sprite_Gauge.prototype.bitmapWidth() + 18;
         const wh = this.windowAreaHeight() + extra;
-        const wx = Number(NABSparam.wx) || 0;
+        const px = Number(NABSparam.wx) || 0;  // v1.1で追加
+        const rx = Graphics.boxWidth - ww + 9; // v1.1で追加
+        const wx = (px < 0 ? rx : 0) + px;     // v1.1で改変
         const wy = Number(NABSparam.wy) || 0;
         return new Rectangle(wx, wy, ww, wh);
     };
