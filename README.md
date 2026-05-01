@@ -11,6 +11,8 @@
 
 # download
 
+現在のバージョン： v1.1.0 (2026/05/01)　（HDLayout.js対策および右端指定）
+
 プラグイン単独での download は、[右クリック「名前を付けてリンク先を保存」](https://raw.githubusercontent.com/nolimits-tukool/NLM_AnotherBattleStatusMZ/refs/heads/main/NLM_AnotherBattleStatusMZ.js)  
 RPGツクールMZ専用です
 
